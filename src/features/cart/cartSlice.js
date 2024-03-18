@@ -15,6 +15,18 @@ const cartReducer = (state = initialState, action) => {
             amount: 0,
             totalPrice: 0,
          };
+      case 'cart/increment': {
+         const item = state.cartItems.find((item) => item.id === action.payload);
+         return {
+            ...state,
+            cartItems: state.cartItems.map((item) => {
+               if (item.id === action.payload) {
+                  return { ...item, amount: item.amount + 1 };
+               }
+               return item;
+            }),
+         };
+      }
       default:
          return state;
    }
@@ -22,6 +34,10 @@ const cartReducer = (state = initialState, action) => {
 
 export const clearCart = () => {
    return { type: 'cart/clear' };
+};
+
+export const increment = (id) => {
+   return { type: 'cart/increment', payload: id };
 };
 
 export default cartReducer;

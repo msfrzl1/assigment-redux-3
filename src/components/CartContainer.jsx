@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import cartItems from '../cartItems';
 import CartItem from './CartItem';
 import Modal from './Modal';
 import { openModal } from '../features/modal/modalSlice';
@@ -8,6 +7,8 @@ const CartContainer = () => {
    const amount = 2;
    const dispatch = useDispatch();
    const isOpen = useSelector((store) => store.modal.isOpen);
+   const cartItems = useSelector((store) => store.cart.cartItems);
+   const total = useSelector((store) => store.cart.totalPrice);
 
    if (amount < 1) {
       return (
@@ -39,7 +40,7 @@ const CartContainer = () => {
             <hr />
             <div className='cart-total'>
                <h4>
-                  total <span>$0</span>
+                  total <span>${total}</span>
                </h4>
             </div>
             <button

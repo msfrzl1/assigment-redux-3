@@ -50,6 +50,15 @@ const cartReducer = (state = initialState, action) => {
             totalPrice: newItems.reduce((total, item) => total + item.price * item.amount, 0),
          };
       }
+      case 'cart/remove': {
+         const newItems = state.cartItems.filter((item) => item.id !== action.payload);
+         return {
+            ...state,
+            cartItems: newItems,
+            amount: newItems.reduce((total, item) => total + item.amount, 0),
+            totalPrice: newItems.reduce((total, item) => total + item.price * item.amount, 0),
+         };
+      }
       default:
          return state;
    }
@@ -65,6 +74,10 @@ export const increment = (id) => {
 
 export const decrement = (id) => {
    return { type: 'cart/decrement', payload: id };
+};
+
+export const remove = (id) => {
+   return { type: 'cart/remove', payload: id };
 };
 
 export default cartReducer;

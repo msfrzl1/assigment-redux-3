@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { ChevronDown, ChevronUp } from '../icons';
-import { increment, decrement } from '../features/cart/cartSlice';
+import { increment, decrement, remove } from '../features/cart/cartSlice';
 
 const CartItem = ({ id, img, title, price, amount }) => {
    const dispatch = useDispatch();
@@ -13,7 +13,12 @@ const CartItem = ({ id, img, title, price, amount }) => {
          <div>
             <h4>{title}</h4>
             <h4 className='item-price'>${price}</h4>
-            <button className='remove-btn'>remove</button>
+            <button
+               className='remove-btn'
+               onClick={() => dispatch(remove(id))}
+            >
+               remove
+            </button>
          </div>
          <div>
             <button

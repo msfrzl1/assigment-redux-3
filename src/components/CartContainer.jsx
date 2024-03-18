@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { openModal } from '../features/modal/modalSlice';
 import CartItem from './CartItem';
 import Modal from './Modal';
-import { openModal } from '../features/modal/modalSlice';
 
 const CartContainer = () => {
    const amount = 2;

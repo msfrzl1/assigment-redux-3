@@ -25,6 +25,29 @@ const cartReducer = (state = initialState, action) => {
                }
                return item;
             }),
+            amount: state.amount + 1,
+            totalPrice: state.totalPrice + item.price,
+         };
+      }
+      case 'cart/decrement': {
+         const newItems = state.cartItems
+            .map((item) => {
+               if (item.id === action.payload) {
+                  if (item.amount === 1) {
+                     return null;
+                  } else if (item.amount > 1) {
+                     return { ...item, amount: item.amount - 1 };
+                  }
+               } else {
+                  return item;
+               }
+            })
+            .filter((item) => item !== null);
+         return {
+            ...state,
+            cartItems: newItems,
+            amount: state.amount - 1,
+            totalPrice: newItems.reduce((total, item) => total + item.price * item.amount, 0),
          };
       }
       default:
@@ -38,6 +61,10 @@ export const clearCart = () => {
 
 export const increment = (id) => {
    return { type: 'cart/increment', payload: id };
+};
+
+export const decrement = (id) => {
+   return { type: 'cart/decrement', payload: id };
 };
 
 export default cartReducer;

@@ -4,8 +4,8 @@ import CartItem from './CartItem';
 import Modal from './Modal';
 
 const CartContainer = () => {
-   const amount = 2;
    const dispatch = useDispatch();
+   const amount = 2;
    const isOpen = useSelector((store) => store.modal.isOpen);
    const cartItems = useSelector((store) => store.cart.cartItems);
    const total = useSelector((store) => store.cart.totalPrice);
@@ -54,4 +54,5 @@ const CartContainer = () => {
       </section>
    );
 };
+
 export default CartContainer;

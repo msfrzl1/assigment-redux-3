@@ -3,6 +3,7 @@ import { CartIcon } from '../icons';
 
 const Navbar = () => {
    const amount = useSelector((store) => store.cart.amount);
+
    return (
       <>
          <nav>
@@ -19,4 +20,5 @@ const Navbar = () => {
       </>
    );
 };
+
 export default Navbar;
